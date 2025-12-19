@@ -121,21 +121,4 @@ class _NewItemState extends State<NewItem> {
   }
 }
 
-DropdownButtonFormField<GroceryCategory>(
-  initialValue: _selectedCategory,
-  items: GroceryCategory.values
-      .map(
-        (category) => DropdownMenuItem(
-          value: category,
-          child: Text(category.name),
-        ),
-      )
-      .toList(),
-  onChanged: (value) {
-    if (value != null) {
-      setState(() {
-        _selectedCategory = value;
-      });
-    }
-  },
-),
+
