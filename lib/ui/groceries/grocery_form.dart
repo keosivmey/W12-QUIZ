@@ -43,11 +43,26 @@ class _NewItemState extends State<NewItem> {
 
   void onReset() {
     // Will be implemented later - Reset all fields to the initial values
+    setState(() {
+      _nameController.text = defautName;
+      _quantityController.text = defaultQuantity.toString();
+      _selectedCategory = defaultCategory;
+    });
   }
-
   void onAdd() {
     // Will be implemented later - Create and return the new grocery
-  }
+  final name = _nameController.text.trim();
+  final quantity = int.tryParse(_quantityController.text) ?? defaultQuantity;
+
+  final newGrocery = Grocery(
+    id: DateTime.now().toString(),
+    name: name,
+    quantity: quantity,
+    category: _selectedCategory,
+  );
+
+  Navigator.of(context).pop(newGrocery);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -105,3 +120,22 @@ class _NewItemState extends State<NewItem> {
     );
   }
 }
+
+DropdownButtonFormField<GroceryCategory>(
+  initialValue: _selectedCategory,
+  items: GroceryCategory.values
+      .map(
+        (category) => DropdownMenuItem(
+          value: category,
+          child: Text(category.name),
+        ),
+      )
+      .toList(),
+  onChanged: (value) {
+    if (value != null) {
+      setState(() {
+        _selectedCategory = value;
+      });
+    }
+  },
+),

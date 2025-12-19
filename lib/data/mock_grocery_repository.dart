@@ -1,4 +1,4 @@
-import '../models/grocery.dart';
+import '../../models/grocery.dart';
 
 final dummyGroceryItems = [
   const Grocery(
